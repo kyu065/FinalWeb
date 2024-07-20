@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palm Plaza Games</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: black;
+      color: #00FF00;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .navbar {
+      background-color: #111;
+    }
+    .navbar-brand, .nav-link, .btn {
+      color: #FFFF00;
+    }
+    .jumbotron {
+      background-color: #222;
+      color: #FFFF00;
+      padding: 20px;
+      border: 2px solid transparent;
+      transition: border-color 0.5s ease-in-out;
+    }
+    .btn-primary {
+      background-color: #FFFF00;
+      border: none;
+      color: black;
+    }
+    .btn-primary:hover {
+      background-color: #FFD700;
+    }
+    .container, .form-control {
+      background-color: #222;
+      color: #00FF00;
+    }
+    .form-control::placeholder {
+      color: #555;
+    }
+    .form-group label {
+      color: #00FF00;
+    }
+    .scrolling-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    .scrolling-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .card {
+      flex: 0 0 auto;
+      width: 18rem;
+      margin-right: 1rem;
+    }
+    footer {
+      background-color: #111;
+      color: #FFFF00;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+    .footer-section {
+      margin: 20px 0;
+    }
+    .social-icons img {
+      width: 30px;
+      margin: 0 10px;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="index.html"><img src="logo.png" alt="Palm Plaza Games" width="50" height="50"></a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="deals.html" id="dealsLink">In-Game Deals</a></li>
+        <li class="nav-item"><a class="nav-link" href="games.html" id="gamesLink">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="purchase.html" id="purchaseLink">In-Game Purchases</a></li>
+      </ul>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="loginButton" onclick="window.location.href='login.html'">Log in</button>
+      <button class="btn btn-outline-primary my-2 my-sm-0" id="signupButton" onclick="window.location.href='signup.html'">Sign Up</button>
+      <div class="btn-group ml-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Language
+        </button>
+        <div class="dropdown-menu" aria-labelledby="languageDropdown">
+          <a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a>
+          <a class="dropdown-item" href="#" onclick="setLanguage('zh')">中文</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5" id="mainContent">
+    <div class="jumbotron text-center" id="welcomeMessageBox">
+      <h1 class="display-4" id="welcomeMessage">Welcome to Palm Plaza Games</h1>
+      <p class="lead" id="leadMessage">Enjoy the best games and deals.</p>
+      <hr class="my-4">
+      <p id="subMessage">Click below to start playing!</p>
+      <button class="btn btn-primary btn-lg" id="playNowButton" onclick="window.location.href='games.html'">Play Now!</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-section social-icons">
+      <a href="https://www.reddit.com" target="_blank"><img src="rb.png" alt="Reddit"></a>
+      <a href="https://www.whatsapp.com" target="_blank"><img src="wc.png" alt="WhatsApp"></a>
+      <a href="mailto:someone@example.com"><img src="eml.png" alt="Email"></a>
+    </div>
+    <div class="footer-section">
+      <a href="community.html" id="communityBoards">Community Boards</a>
+    </div>
+  </footer>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    const translations = {
+      en: {
+        welcomeMessage: 'Welcome to Palm Plaza Games',
+        leadMessage: 'Enjoy the best games and deals.',
+        subMessage: 'Click below to start playing!',
+        playNowButton: 'Play Now!',
+        loginButton: 'Log in',
+        signupButton: 'Sign Up',
+        dealsLink: 'In-Game Deals',
+        gamesLink: 'Games',
+        purchaseLink: 'In-Game Purchases',
+        communityBoards: 'Community Boards'
+      },
+      zh: {
+        welcomeMessage: '欢迎来到棕榈广场游戏',
+        leadMessage: '享受最好的游戏和优惠。',
+        subMessage: '点击下面开始玩!',
+        playNowButton: '立即玩!',
+        loginButton: '登录',
+        signupButton: '注册',
+        dealsLink: '游戏内优惠',
+        gamesLink: '游戏',
+        purchaseLink: '游戏内购买',
+        communityBoards: '社区论坛'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.getElementById('welcomeMessage').innerText = translations[lang].welcomeMessage;
+      document.getElementById('leadMessage').innerText = translations[lang].leadMessage;
+      document.getElementById('subMessage').innerText = translations[lang].subMessage;
+      document.getElementById('playNowButton').innerText = translations[lang].playNowButton;
+      document.getElementById('loginButton').innerText = translations[lang].loginButton;
+      document.getElementById('signupButton').innerText = translations[lang].signupButton;
+      document.getElementById('dealsLink').innerText = translations[lang].dealsLink;
+      document.getElementById('gamesLink').innerText = translations[lang].gamesLink;
+      document.getElementById('purchaseLink').innerText = translations[lang].purchaseLink;
+      document.getElementById('communityBoards').innerText = translations[lang].communityBoards;
+    }
+  </script>
+</body>
+</html>

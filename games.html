@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games - Palm Plaza Games</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000; /* Changed background to black */
+      color: #00FF00;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .navbar {
+      background-color: #111;
+    }
+    .navbar-brand, .nav-link, .btn {
+      color: #FFFF00;
+    }
+    .jumbotron {
+      background-color: #222;
+      color: #FFFF00;
+    }
+    .btn-primary {
+      background-color: #FFFF00;
+      border: none;
+      color: black;
+    }
+    .btn-primary:hover {
+      background-color: #FFD700;
+    }
+    .container, .form-control {
+      background-color: #222;
+      color: #00FF00;
+    }
+    .form-control::placeholder {
+      color: #555;
+    }
+    .form-group label {
+      color: #00FF00;
+    }
+    .scrolling-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    .scrolling-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .card {
+      flex: 0 0 auto;
+      width: 18rem;
+      margin-right: 1rem;
+      background-color: #333;
+      border: 2px solid #FFFF00;
+      color: #00FF00;
+    }
+    .card:hover {
+      border-color: #FFD700;
+    }
+    .welcome-section {
+      text-align: center;
+      margin-top: 2rem;
+      color: #FFFF00;
+    }
+    .login-prompt {
+      text-align: center;
+      margin-top: 2rem;
+      color: #FFFF00;
+    }
+    footer {
+      background-color: #111;
+      color: #FFFF00;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+    .footer-section {
+      margin: 20px 0;
+    }
+    .social-icons img {
+      width: 30px;
+      margin: 0 10px;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="index.html"><img src="logo.png" alt="Palm Plaza Games" width="50" height="50"></a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="deals.html" id="dealsLink">In-Game Deals</a></li>
+        <li class="nav-item"><a class="nav-link" href="games.html" id="gamesLink">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="purchase.html" id="purchaseLink">In-Game Purchases</a></li>
+      </ul>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="loginButton" onclick="window.location.href='login.html'">Log in</button>
+      <button class="btn btn-outline-primary my-2 my-sm-0" id="signupButton" onclick="window.location.href='signup.html'">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="container welcome-section">
+    <h2>Welcome to Palm Plaza Games!</h2>
+    <p>Check out these amazing games available to you. Log in to start playing and enjoy a fantastic gaming experience!</p>
+  </div>
+
+  <div class="container mt-5" id="gameShowcase">
+    <h2>Games</h2>
+    <div class="scrolling-wrapper">
+      <div class="card">
+        <img class="card-img-top" src="game1.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game2.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game3.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game4.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game5.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game6.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game7.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game8.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game9.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game10.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game11.png" alt="Game Image">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="game12.png" alt="Game Image">
+      </div>
+    </div>
+  </div>
+
+  <div class="login-prompt">
+    <p>Log in to play the games!</p>
+    <button class="btn btn-outline-success my-2 my-sm-0" id="loginButtonPrompt" onclick="window.location.href='login.html'">Log in</button>
+    <button class="btn btn-outline-primary my-2 my-sm-0" id="signupButtonPrompt" onclick="window.location.href='signup.html'">Sign Up</button>
+  </div>
+
+  <footer>
+    <div class="footer-section">
+      <p>&copy; 2024 Palm Plaza Games. All rights reserved.</p>
+    </div>
+    <div class="footer-section social-icons">
+      <a href="https://www.reddit.com" target="_blank"><img src="rb.png" alt="Reddit"></a>
+      <a href="https://www.whatsapp.com" target="_blank"><img src="wc.png" alt="WhatsApp"></a>
+      <a href="mailto:someone@example.com"><img src="eml.png" alt="Email"></a>
+    </div>
+    <div class="footer-section">
+      <a href="community.html" id="communityBoards">Community Boards</a>
+    </div>
+  </footer>
+</body>
+</html>

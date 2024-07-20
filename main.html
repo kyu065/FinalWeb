@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main - Palm Plaza Games</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #00FF00;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .navbar {
+      background-color: #111;
+    }
+    .navbar-brand, .nav-link, .btn {
+      color: #FFFF00;
+    }
+    .container, .form-control {
+      background-color: #222;
+      color: #00FF00;
+    }
+    .card-title {
+      color: #000000;
+    }
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      margin-top: 10px;
+    }
+    .calendar div {
+      width: 30px;
+      height: 30px;
+      background-color: #FFF;
+      text-align: center;
+      line-height: 30px;
+      color: #000;
+      font-size: 12px;
+      position: relative;
+    }
+    .calendar div:hover::after {
+      content: attr(data-time) ' hrs';
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #222;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 10px;
+      color: #fff;
+    }
+    .tournament-box {
+      background-color: #333;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #555;
+      border-radius: 5px;
+      position: relative;
+    }
+    .remove-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: red;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .content-box {
+      border: 10px solid;
+      animation: color-change 5s infinite;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    @keyframes color-change {
+      0% { border-color: rgb(233, 134, 54); }
+      25% { border-color: yellow; }
+      50% { border-color: rgb(112, 211, 112); }
+      75% { border-color: rgb(115, 124, 238); }
+      100% { border-color: red; }
+    }
+    .section-divider {
+      border-top: 2px solid #555;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .modal-content {
+      background-color: #222;
+      color: #00FF00;
+    }
+    .modal-header {
+      border-bottom: 1px solid #555;
+    }
+    .modal-footer {
+      border-top: 1px solid #555;
+    }
+    .modal-img {
+      max-width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+    }
+    .close {
+      color: #FFF;
+      opacity: 1;
+    }
+    .close:hover {
+      color: #FF0000;
+    }
+    footer {
+      background-color: #111;
+      color: #FFFF00;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body onload="initializePage()">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="index.html"><img src="logo.png" alt="Palm Plaza Games" width="50" height="50"></a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="deals.html">In-Game Deals</a></li>
+        <li class="nav-item"><a class="nav-link" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="purchase.html">In-Game Purchases</a></li>
+      </ul>
+      <span class="navbar-text" id="coinCount"></span>
+      <button class="btn btn-outline-danger my-2 my-sm-0" onclick="handleLogout()">Log out</button>
+    </div>
+  </nav>
+
+  <div class="container mt-5 content-box">
+    <!-- User Profile and Tournaments Section -->
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <img src="pfp.png" alt="Profile Picture" class="profile-pic">
+        <h3 id="username"></h3>
+        <p>Email: <span id="email"></span></p>
+      </div>
+      <div class="col-6">
+        <h4>Hosting Tournaments</h4>
+        <div id="hostingTournaments"></div>
+        <div class="section-divider"></div>
+        <h4>Participating Tournaments</h4>
+        <div id="participatingTournaments"></div>
+        <div class="section-divider"></div>
+        <h4>Host a Tournament</h4>
+        <button class="btn btn-primary" onclick="hostTournament()">Host Tournament (5 coins)</button>
+      </div>
+      <div class="col-6">
+        <h4>Time Played</h4>
+        <div class="calendar" id="timePlayedCalendar"></div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-12">
+        <h4>Available filters:</h4>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary" onclick="filterGames('all')">All</button>
+          <button type="button" class="btn btn-secondary" onclick="filterGames('action')">Action</button>
+          <button type="button" class="btn btn-secondary" onclick="filterGames('adventure')">Adventure</button>
+          <button type="button" class="btn btn-secondary" onclick="filterGames('strategy')">Strategy</button>
+          <button type="button" class="btn btn-secondary" onclick="filterGames('puzzle')">Puzzle</button>
+          <button type="button" class="btn btn-secondary" onclick="filterGames('popular')">Popular</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="gameGrid"></div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="modal fade" id="gameModal" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="gameModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img id="modalImg" class="modal-img" src="" alt="">
+          <p id="modalDescription"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" disabled>Play</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Palm Plaza Games. All rights reserved.</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    const user = {
+      username: 'PlayerOne',
+      email: 'playerone@example.com',
+      hostingTournaments: ['Tournament A', 'Tournament B'],
+      participatingTournaments: ['Tournament C', 'Tournament D'],
+      coins: 20
+    };
+
+    const games = [
+      { title: 'Tetris', genre: 'puzzle', image: 'game1.png', description: 'A classic puzzle game.' },
+      { title: 'Pacman', genre: 'strategy', image: 'game2.png', description: 'Navigate through a maze to eat pellets.' },
+      { title: 'Chess in the Park', genre: 'strategy', image: 'game3.png', description: 'Play chess in the park.' },
+      { title: 'Memory', genre: 'puzzle', image: 'game4.png', description: 'Match pairs of cards.' },
+      { title: 'Space Invaders', genre: 'action', image: 'game5.png', description: 'Shoot down invading aliens.' },
+      { title: 'Dig Dug', genre: 'strategy', image: 'game6.png', description: 'Dig tunnels and defeat monsters.' },
+      { title: 'Frogger', genre: 'adventure', image: 'game7.png', description: 'Guide a frog across the road and river.' },
+      { title: 'Duck Hunt', genre: 'adventure', image: 'game8.png', description: 'Shoot ducks in this classic game.' },
+      { title: 'Mario', genre: 'strategy', image: 'game9.png', description: 'Platformer adventure with Mario.' },
+      { title: 'Street Fighter', genre: 'action', image: 'game10.png', description: 'Classic fighting game.' },
+      { title: 'Street Racer', genre: 'action', image: 'game11.png', description: 'Race against opponents.' },
+      { title: 'Connect 4', genre: 'strategy', image: 'game12.png', description: 'Connect four in a row.' }
+    ];
+
+    function initializePage() {
+      updateNavbar();
+      loadUserProfile();
+      loadTimePlayedCalendar();
+      displayGames(games);
+    }
+
+    function updateNavbar() {
+      document.getElementById('coinCount').innerText = `Coins: ${user.coins}`;
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('coins');
+      window.location.href = 'index.html';
+    }
+
+    function loadUserProfile() {
+      document.getElementById('username').innerText = user.username;
+      document.getElementById('email').innerText = user.email;
+
+      const hostingTournamentsDiv = document.getElementById('hostingTournaments');
+      hostingTournamentsDiv.innerHTML = '';
+      user.hostingTournaments.forEach((tournament, index) => {
+        const div = document.createElement('div');
+        div.className = 'tournament-box';
+        div.innerHTML = `
+          ${tournament}
+          <button class="remove-button" onclick="leaveTournament(${index}, 'hosting')">Leave</button>
+        `;
+        hostingTournamentsDiv.appendChild(div);
+      });
+
+      const participatingTournamentsDiv = document.getElementById('participatingTournaments');
+      participatingTournamentsDiv.innerHTML = '';
+      user.participatingTournaments.forEach((tournament, index) => {
+        const div = document.createElement('div');
+        div.className = 'tournament-box';
+        div.innerHTML = `
+          ${tournament}
+          <button class="remove-button" onclick="leaveTournament(${index}, 'participating')">Leave</button>
+        `;
+        participatingTournamentsDiv.appendChild(div);
+      });
+    }
+
+    function loadTimePlayedCalendar() {
+      const calendarDiv = document.getElementById('timePlayedCalendar');
+      for (let i = 1; i <= 31; i++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.innerText = i;
+        dayDiv.setAttribute('data-time', Math.floor(Math.random() * 5)); // Random hours for demonstration
+        calendarDiv.appendChild(dayDiv);
+      }
+    }
+
+    function displayGames(games) {
+      const gameGrid = document.getElementById('gameGrid');
+      gameGrid.innerHTML = '';
+
+      games.forEach((game, index) => {
+        const card = document.createElement('div');
+        card.className = 'col-md-3 mb-4';
+        card.innerHTML = `
+          <div class="card text-white bg-dark">
+            <img src="${game.image}" class="card-img-top" alt="${game.title}">
+            <div class="card-body">
+              <h5 class="card-title">${game.title}</h5>
+              <button class="btn btn-primary" onclick="showGameModal(${index})">View Details</button>
+            </div>
+          </div>
+        `;
+        gameGrid.appendChild(card);
+      });
+    }
+
+    function showGameModal(index) {
+      const game = games[index];
+      document.getElementById('gameModalLabel').innerText = game.title;
+      document.getElementById('modalImg').src = game.image;
+      document.getElementById('modalDescription').innerText = game.description;
+      $('#gameModal').modal('show');
+    }
+
+    function filterGames(filter) {
+      const filteredGames = games.filter(game => {
+        if (filter === 'all') return true;
+        if (filter === 'popular' && game.title === 'Chess in the Park') return true;
+        return game.genre === filter;
+      });
+      displayGames(filteredGames);
+    }
+
+    function hostTournament() {
+      if (user.coins >= 5) {
+        const tournamentName = prompt("Enter the tournament name:");
+        if (tournamentName) {
+          user.coins -= 5;
+          user.hostingTournaments.push(tournamentName);
+          updateNavbar();
+          loadUserProfile();
+          alert('Tournament hosted!');
+        } else {
+          alert('Tournament name is required.');
+        }
+      } else {
+        alert('Not enough coins!');
+      }
+    }
+
+    function leaveTournament(index, type) {
+      if (type === 'hosting') {
+        user.hostingTournaments.splice(index, 1);
+      } else if (type === 'participating') {
+        user.participatingTournaments.splice(index, 1);
+      }
+      loadUserProfile();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In-Game Deals - Palm Plaza Games</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: black;
+      background-size: cover;
+      color: #00FF00;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .navbar {
+      background-color: #111;
+    }
+    .navbar-brand, .nav-link, .btn {
+      color: #FFFF00;
+    }
+    .container, .form-control {
+      background-color: #222;
+      color: #00FF00;
+    }
+    .card {
+      position: relative;
+      border: 10px solid transparent;
+      border-radius: 5px;
+      animation: colorChange 4s linear infinite;
+    }
+    @keyframes colorChange {
+      0% { border-color: rgb(233, 134, 54); }
+      25% { border-color: yellow; }
+      50% { border-color: rgb(112, 211, 112); }
+      75% { border-color: rgb(115, 124, 238); }
+      100% { border-color: red; }
+    }
+    .card-text, .card-title {
+      color: #000000;
+    }
+    footer {
+      background-color: #111;
+      color: #FFFF00;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+    .footer-section {
+      margin: 20px 0;
+    }
+    .social-icons img {
+      width: 30px;
+      margin: 0 10px;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="index.html"><img src="logo.png" alt="Palm Plaza Games" width="50" height="50"></a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="deals.html" id="dealsLink">In-Game Deals</a></li>
+        <li class="nav-item"><a class="nav-link" href="games.html" id="gamesLink">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="purchase.html" id="purchaseLink">In-Game Purchases</a></li>
+      </ul>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="loginButton" onclick="window.location.href='login.html'">Log in</button>
+      <button class="btn btn-outline-primary my-2 my-sm-0" id="signupButton" onclick="window.location.href='signup.html'">Sign Up</button>
+      <div class="btn-group ml-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Language
+        </button>
+        <div class="dropdown-menu" aria-labelledby="languageDropdown">
+          <a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a>
+          <a class="dropdown-item" href="#" onclick="setLanguage('zh')">中文</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5" id="inGameDeals">
+    <h2 id="pageTitle">In-Game Deals</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <a href="purchase.html">
+            <img class="card-img-top" src="coins.png" alt="Coin Image">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title" id="cardTitle1">Coins</h5>
+            <p class="card-text" id="cardText1">$1.99</p>
+            <a href="purchase.html" class="stretched-link" aria-label="Purchase Coins"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <a href="purchase.html">
+            <img class="card-img-top" src="coinBag.png" alt="Coin Bag Image">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title" id="cardTitle2">Coin Bag</h5>
+            <p class="card-text" id="cardText2">$4.99</p>
+            <a href="purchase.html" class="stretched-link" aria-label="Purchase Coin Bag"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <a href="purchase.html">
+            <img class="card-img-top" src="coinChest.png" alt="Coin Chest Image">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title" id="cardTitle3">Coin Chest</h5>
+            <p class="card-text" id="cardText3">$9.99</p>
+            <a href="purchase.html" class="stretched-link" aria-label="Purchase Coin Chest"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-section social-icons">
+      <a href="https://www.reddit.com" target="_blank"><img src="rb.png" alt="Reddit"></a>
+      <a href="https://www.whatsapp.com" target="_blank"><img src="wc.png" alt="WhatsApp"></a>
+      <a href="mailto:someone@example.com"><img src="eml.png" alt="Email"></a>
+    </div>
+    <div class="footer-section">
+      <a href="community.html" id="communityBoards">Community Boards</a>
+    </div>
+  </footer>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    const translations = {
+      en: {
+        pageTitle: 'In-Game Deals',
+        cardTitle1: 'Coins',
+        cardText1: '$1.99',
+        cardTitle2: 'Coin Bag',
+        cardText2: '$4.99',
+        cardTitle3: 'Coin Chest',
+        cardText3: '$9.99',
+        communityBoards: 'Community Boards'
+      },
+      zh: {
+        pageTitle: '游戏内优惠',
+        cardTitle1: '硬币',
+        cardText1: '¥1.99',
+        cardTitle2: '硬币袋',
+        cardText2: '¥4.99',
+        cardTitle3: '硬币箱',
+        cardText3: '¥9.99',
+        communityBoards: '社区论坛'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.getElementById('pageTitle').innerText = translations[lang].pageTitle;
+      document.getElementById('cardTitle1').innerText = translations[lang].cardTitle1;
+      document.getElementById('cardText1').innerText = translations[lang].cardText1;
+      document.getElementById('cardTitle2').innerText = translations[lang].cardTitle2;
+      document.getElementById('cardText2').innerText = translations[lang].cardText2;
+      document.getElementById('cardTitle3').innerText = translations[lang].cardTitle3;
+      document.getElementById('cardText3').innerText = translations[lang].cardText3;
+      document.getElementById('communityBoards').innerText = translations[lang].communityBoards;
+    }
+  </script>
+</body>
+</html>
